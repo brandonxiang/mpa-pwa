@@ -1,12 +1,13 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
+var swPrecacheConfig = require('./sw-precache')
 
 module.exports = {
   build: {
     env: require('./prod.env'),
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'static',
+    assetsHtml: process.env.npm_config_nomodule ? '' : '/module',
     assetsPublicPath: '',
     CDN_PATH: '../',
     productionSourceMap: process.env.npm_config_nomap ? false : true,
@@ -21,6 +22,7 @@ module.exports = {
     // `npm run build --report`
     // Set to `true` or `false` to always turn it on or off
     bundleAnalyzerReport: process.env.npm_config_report,
+    swPrecache: swPrecacheConfig,
     dllFolder: 'static/dll',
     dllLibs: [
       'vue/dist/vue.esm.js',
