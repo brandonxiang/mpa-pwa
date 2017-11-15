@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include src/ejs/head.ejs %>
+    <title>{{ name }}</title>
+    <link rel="stylesheet" href="<%= htmlWebpackPlugin.options.libCssName %>">
+    <script src="<%= htmlWebpackPlugin.options.libJsName %>"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
