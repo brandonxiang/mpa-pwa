@@ -64,7 +64,7 @@ var webpackConfig = merge(baseWebpackConfig, {
       bootstrapFilename: utils.assetsPath('js/manifest.[chunkhash].js'),
       templateFilename: '[name].html',
       templatePath: config.build.assetsRoot + config.build.assetsHtml,
-      htmlTemplatePath: resolve('src/module/[name]/index.ejs'),
+      htmlTemplatePath: resolve('src/module/[name]/index.html'),
       htmlWebpackPluginOptions: {
           inject: true,
           minify: {
@@ -73,7 +73,7 @@ var webpackConfig = merge(baseWebpackConfig, {
             minifyJS: true,
             minifyCSS: true,
             collapseWhitespace: true,
-            removeOptionalTags: true,
+            // removeOptionalTags: true,
             removeScriptTypeAttributes: true,
             processConditionalComments: true,
           },
