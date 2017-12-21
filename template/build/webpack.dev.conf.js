@@ -37,7 +37,7 @@ module.exports = merge(baseWebpackConfig, {
           bootstrapFilename: 'manifest',
           templateFilename: '[name].html',
           templatePath: 'module',
-          htmlTemplatePath: resolve('src/module/[name]/index.ejs'),
+          htmlTemplatePath: resolve('src/module/[name]/index.html'),
           htmlWebpackPluginOptions: {
               inject: true,
               libJsName: bundleConfig.libs.js ? '../' + config.build.dllFolder + '/' + bundleConfig.libs.js : '', 
