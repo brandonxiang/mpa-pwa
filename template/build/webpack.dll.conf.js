@@ -6,16 +6,16 @@ var AssetsPlugin = require('assets-webpack-plugin'); // 生成文件名，配合
 
 module.exports        = {
   entry: {
-    libs: config.build.dllLibs,
+    libs: config.dll.libs,
   },
   output: {
-    path: path.resolve(__dirname, '../' + config.build.dllFolder),
+    path: path.resolve(__dirname, '../' + config.dll.path),
     filename: '[name].[chunkhash:7].js',
     library: '[name]_library'
   },
   plugins: [
     new webpack.DllPlugin({
-      path: path.resolve(__dirname, '../' + config.build.dllFolder + '/[name]-mainfest.json'),
+      path: path.resolve(__dirname, '../' + config.dll.path + '/[name]-mainfest.json'),
       name: '[name]_library',
       context: __dirname // 执行的上下文环境，对之后DllReferencePlugin有用
     }),
@@ -27,7 +27,7 @@ module.exports        = {
     }),
     new AssetsPlugin({
       filename: 'bundle-config.json',
-      path: './' + config.build.dllFolder
+      path: './' + config.dll.path
     }),
   ],
   module: {

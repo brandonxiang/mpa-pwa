@@ -1,10 +1,10 @@
 {
-  "name": "mpa",
+  "name": "mpa-pwa",
   "version": "1.0.0",
   "license": "MIT",
   "description": "A full-featured Webpack setup with hot-reload, lint-on-save, unit testing & css extraction.",
   "scripts": {
-    "test": "rm -rf ./test && ./node_modules/.bin/vue init . test && cd test && npm i"
+    "test": "./node_modules/.bin/vue init . test"
   },
   "devDependencies": {
     "vue-cli": "^2.8.1"
