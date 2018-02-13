@@ -55,7 +55,7 @@ const webpackConfig = {
   ]
 }
 
-const multiWebpackConfig = utils.setMultipagePlugin('./src/module/', 'index.html' , {
+const multiWebpackConfig = utils.setMultipagePlugin('./src/module/', 'index.ejs' , {
   inject: true,
   minify: {
     removeComments: true,

@@ -140,7 +140,7 @@ if (config.build.bundleAnalyzerReport) {
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }
 
-const multiWebpackConfig = utils.setMultipagePlugin('./src/module/', 'index.html' , {
+const multiWebpackConfig = utils.setMultipagePlugin('./src/module/', 'index.ejs' , {
   inject: true,
   minify: {
     removeComments: true,
