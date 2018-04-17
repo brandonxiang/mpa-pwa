@@ -8,9 +8,6 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 const path = require('path')
 
-const bundleConfig = require(`../${config.dll.path}/bundle-config.json`)
-const libJsName =  bundleConfig.libs.js ? `../${config.dll.path}/${bundleConfig.libs.js}` : ''
-const libCssName = bundleConfig.libs.css ? `../${config.dll.path}/${bundleConfig.libs.css}` : ''
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -19,7 +16,7 @@ function resolve (dir) {
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
-const webpackConfig = {
+let devWebpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
   },
@@ -53,26 +50,11 @@ const webpackConfig = {
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
     new webpack.NoEmitOnErrorsPlugin(),
   ]
-}
-
-const multiWebpackConfig = utils.setMultipagePlugin('./src/module/', 'index.ejs' , {
-  inject: true,
-  minify: {
-    removeComments: true,
-    collapseWhitespace: true,
-    removeAttributeQuotes: true,
-    minifyJS: true,
-    minifyCSS: true,
-    // more options:
-    // https://github.com/kangax/html-minifier#options-quick-reference
-  },
-  // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-  chunksSortMode: 'auto',
-  env: config.dev.env,
 })
 
-const devWebpackConfig = merge(baseWebpackConfig, multiWebpackConfig , webpackConfig);
-
+utils.setMultipagePlugin(devWebpackConfig, './src/module', 'index.ejs', {
+  inject: true,
+})
 
 
 module.exports = new Promise((resolve, reject) => {

@@ -25,6 +25,11 @@ module.exports        = {
         warnings: false
       },
     }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),
     new AssetsPlugin({
       filename: 'bundle-config.json',
       path: './' + config.dll.path

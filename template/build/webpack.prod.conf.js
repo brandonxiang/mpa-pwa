@@ -140,7 +140,8 @@ if (config.build.bundleAnalyzerReport) {
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }
 
-const multiWebpackConfig = utils.setMultipagePlugin('./src/module/', 'index.ejs' , {
+
+module.exports = utils.setMultipagePlugin(webpackConfig, './src/module/', 'index.ejs' , {
   inject: true,
   minify: {
     removeComments: true,
@@ -152,8 +153,5 @@ const multiWebpackConfig = utils.setMultipagePlugin('./src/module/', 'index.ejs'
     // https://github.com/kangax/html-minifier#options-quick-reference
   },
   // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-  chunksSortMode: 'auto',
-  env: config.dev.env,
+  chunksSortMode: 'dependency'
 })
-
-module.exports = merge(baseWebpackConfig, multiWebpackConfig, webpackConfig)
