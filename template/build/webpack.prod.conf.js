@@ -24,7 +24,7 @@ const env = {{#if_or unit e2e}}process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
   : {{/if_or}}require('../config/prod.env')
 
-const webpackConfig = {
+let webpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
@@ -115,7 +115,7 @@ const webpackConfig = {
     new workboxPlugin(config.sw.workbox),
     new SwRegisterWebpackPlugin(config.sw.register),
   ]
-}
+})
 
 if (config.build.productionGzip) {
   const CompressionWebpackPlugin = require('compression-webpack-plugin')
@@ -141,7 +141,7 @@ if (config.build.bundleAnalyzerReport) {
 }
 
 
-module.exports = utils.setMultipagePlugin(webpackConfig, './src/module/', 'index.ejs' , {
+webpackConfig = utils.setMultipagePlugin(webpackConfig, './src/module/', 'index.ejs' , {
   inject: true,
   minify: {
     removeComments: true,
@@ -153,5 +153,12 @@ module.exports = utils.setMultipagePlugin(webpackConfig, './src/module/', 'index
     // https://github.com/kangax/html-minifier#options-quick-reference
   },
   // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-  chunksSortMode: 'dependency'
-})
+  chunksSortMode: 'dependency',
+});
+
+
+module.exports = merge(webpackConfig, {
+  plugins: [
+    new SwRegisterWebpackPlugin(config.sw.register),
+  ],
+});
